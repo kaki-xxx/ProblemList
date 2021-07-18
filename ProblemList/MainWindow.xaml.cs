@@ -106,6 +106,8 @@ namespace ProblemList
             {
                 Left = 5
             };
+            check.Checked += turnHighlightOff;
+            check.Unchecked += turnHighlightOn;
             ret.Children.Add(text);
             ret.Children.Add(textBox);
             ret.Children.Add(check);
@@ -143,9 +145,6 @@ namespace ProblemList
                     if (checkBox.IsChecked ?? false)
                     {
                         correctCounter++;
-                    } else
-                    {
-                        answerColStack.Background = new SolidColorBrush(Color.FromArgb(50, 255, 0, 0));
                     }
                 }
             }
@@ -169,6 +168,18 @@ namespace ProblemList
             {
                 buttonSend.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
+        }
+        private void turnHighlightOn(object sender, RoutedEventArgs e)
+        {
+            var check = (CheckBox)sender;
+            var answerCol = (StackPanel)check.Parent;
+            answerCol.Background = new SolidColorBrush(Color.FromArgb(50, 255, 0, 0));
+        }
+        private void turnHighlightOff(object sender, RoutedEventArgs e)
+        {
+            var check = (CheckBox)sender;
+            var answerCol = (StackPanel)check.Parent;
+            answerCol.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
         }
     }
 }
