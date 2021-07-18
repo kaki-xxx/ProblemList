@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Diagnostics;
 
 
 namespace ProblemList
@@ -24,14 +25,17 @@ namespace ProblemList
         int n;
         int max;
         StackPanel prevProblemList;
+        List<TextBox> textBoxes;
         public MainWindow()
         {
             InitializeComponent();
             buttonSend.IsEnabled = false;
+            textBoxes = new List<TextBox>();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             n = 1;
+            textBoxes.Clear();
             try
             {
                 max = int.Parse(textProblemNum.Text);
@@ -97,6 +101,8 @@ namespace ProblemList
             {
                 Width = 60
             };
+            textBox.KeyDown += focusNextTextBox;
+            textBoxes.Add(textBox);
             CheckBox check = new CheckBox
             {
                 IsChecked = true
@@ -180,6 +186,17 @@ namespace ProblemList
             var check = (CheckBox)sender;
             var answerCol = (StackPanel)check.Parent;
             answerCol.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+        }
+        private void focusNextTextBox(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                var text = (TextBox)sender;
+                var answerCol = (StackPanel)text.Parent;
+                var textNum = (TextBlock)answerCol.Children[0];
+                var n = int.Parse(textNum.Text);
+                textBoxes[Math.Min(max - 1, n)].Focus();
+            }
         }
     }
 }
