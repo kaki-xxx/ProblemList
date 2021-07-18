@@ -165,7 +165,7 @@ namespace ProblemList
 
         private void textProblemNum_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            if (e.Key == Key.Enter && buttonSend.IsEnabled)
             {
                 buttonSend.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
