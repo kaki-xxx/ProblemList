@@ -10,7 +10,7 @@
         <StackPanel x:Name="Main" Orientation="Vertical">
             <StackPanel Orientation="Horizontal" Height="20">
                 <TextBlock TextWrapping="Wrap" Text="問題数"/>
-                <TextBox x:Name="textProblemNum" TextWrapping="Wrap" Width="120" Margin="5,0,5,0" TextChanged="textProblemNum_TextChanged"/>
+                <TextBox x:Name="textProblemNum" TextWrapping="Wrap" Width="120" Margin="5,0,5,0" TextChanged="textProblemNum_TextChanged" KeyDown="textProblemNum_KeyDown"/>
                 <Button x:Name="buttonSend" Content="作成" Width="75" Click="Button_Click" Margin="0,0,5,0"/>
                 <CheckBox x:Name="checkEnableSendButton" Content="作成ボタンを有効にする" IsChecked="True" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
                 <Button x:Name="buttonCountCorrectAnswer" Width="75" Margin="200,0,0,0" Content="正答率計算" Click="buttonCountCorrectAnswer_Click"/>
